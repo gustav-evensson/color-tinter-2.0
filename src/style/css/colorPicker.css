@@ -1,0 +1,223 @@
+@import './variables.css';
+.container {
+  position: relative;
+  width: 350px;
+}
+
+.colorPicker {
+  font-family: "Quicksand", sans-serif;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  translate: 0 0;
+  border-radius: 16px;
+  padding: 0;
+  background-color: var(--bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  height: 60px;
+  box-shadow: 0 0 12px -5px hsla(0, 0%, 0%, 0);
+  transition: height 300ms, padding 300ms, border-radius 300ms, translate 300ms, box-shadow 300ms;
+  z-index: 2;
+}
+.colorPicker * {
+  flex-shrink: 0;
+}
+
+.colorInput {
+  border-radius: 16px;
+  padding: 12px;
+  background-color: #ececec;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  transition: background-color 300ms;
+  color: var(--light-accent);
+  width: 100%;
+}
+.colorInput .palletteIcon {
+  flex-shrink: 0;
+  margin-right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.colorInput .palletteIcon path:not(.stroke) {
+  fill: var(--light-accent);
+  opacity: 0.8;
+  transition: fill 200ms;
+}
+.colorInput .palletteIcon .stroke {
+  stroke: var(--light-accent);
+  transition: stroke 200ms;
+}
+.colorInput .palletteIcon:hover path:not(.stroke) {
+  fill: var(--accent);
+}
+.colorInput .palletteIcon:hover .stroke {
+  stroke: var(--accent);
+}
+.colorInput input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  text-transform: uppercase;
+  transition: color 200ms;
+}
+.colorInput input:focus {
+  color: var(--accent);
+}
+
+.showPicker {
+  height: 384px;
+  padding: 16px;
+  border-radius: 32px;
+  translate: 0 0;
+  box-shadow: 0 0 12px -5px hsla(0, 0%, 0%, 0.5);
+}
+.showPicker .colorInput, .showPicker .colorGraph, .showPicker .hueSlider, .showPicker .alphaSlider, .showPicker .hslaDisplay {
+  opacity: 1;
+}
+
+.colorGraph {
+  width: 100%;
+  position: relative;
+  max-width: none;
+  min-width: none;
+  height: 200px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%, #000000 100%), linear-gradient(90deg, #ffffff 0%, #ff0000 100%);
+  opacity: 0;
+  transition: opacity 300ms;
+}
+.colorGraph .indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  border: solid 2px #ffffff;
+  position: absolute;
+  translate: -50% -50%;
+  transition: border 200ms;
+  cursor: pointer;
+}
+.colorGraph .indicator:active {
+  cursor: grab;
+}
+
+.hueSlider, .alphaSlider {
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  padding-inline: 2px;
+  opacity: 0;
+  transition: opacity 300ms;
+  /* All the same stuff for Firefox */
+  /* All the same stuff for IE */
+}
+.hueSlider input[type=range], .alphaSlider input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  color: #fff;
+}
+.hueSlider input[type=range]::-webkit-slider-thumb, .alphaSlider input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+.hueSlider input[type=range]:focus, .alphaSlider input[type=range]:focus {
+  outline: none;
+}
+.hueSlider input[type=range]::-ms-track, .alphaSlider input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.hueSlider input[type=range]::-webkit-slider-thumb, .alphaSlider input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  color: inherit;
+  border: 2px solid currentColor;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: border 200ms;
+}
+.hueSlider input[type=range]::-moz-range-thumb, .alphaSlider input[type=range]::-moz-range-thumb {
+  color: inherit;
+  border: 2px solid currentColor;
+  height: 16px;
+  width: 16px;
+  border-radius: 18px;
+  background: transparent;
+  cursor: pointer;
+  transition: border 200ms;
+}
+.hueSlider input[type=range]::-ms-thumb, .alphaSlider input[type=range]::-ms-thumb {
+  color: inherit;
+  border: 2px solid currentColor;
+  height: 16px;
+  width: 16px;
+  border-radius: 18px;
+  background: transparent;
+  cursor: pointer;
+  transition: border 200ms;
+}
+
+.hueSlider {
+  background: linear-gradient(90deg, hsl(0, 100%, 59%) 5%, #FF9900 15%, #FFF500 25%, #ADFF00 35%, #00FF19 45%, #00FFF0 55%, #0500FF 65%, #AD00FF 75%, #FA00FF 85%, #FF0000 95%);
+}
+
+.alphaSlider {
+  position: relative;
+  overflow: hidden;
+}
+.alphaSlider img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: 1;
+}
+.alphaSlider .aplhGradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background: linear-gradient(270deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 2;
+}
+.alphaSlider input[type=range] {
+  position: relative;
+  z-index: 300;
+}
+
+.hslaDisplay {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 300px;
+  opacity: 0;
+  transition: opacity 300ms;
+}
+.hslaDisplay .hslaValue {
+  padding: 4px;
+  background-color: #353535;
+  color: #CCCCCC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

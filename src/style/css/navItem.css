@@ -1,0 +1,87 @@
+@import './variables.css';
+:root {
+  --dynamic-background: #000;
+}
+
+.navItem {
+  --transition-timing: 300ms;
+  width: calc(100% - 16px);
+  display: block;
+  border-radius: 16px;
+  background-color: transparent;
+  transition: background-color var(--transition-timing) calc(var(--transition-timing) * 2), border-radius var(--transition-timing) var(--transition-timing), width var(--transition-timing) var(--transition-timing);
+  text-decoration: none;
+}
+.navItem .navItemContainer {
+  border-radius: 16px;
+  width: 100%;
+  padding: 12px;
+  color: #000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 300ms;
+  gap: 12px;
+}
+.navItem .navItemContainer .topRadius,
+.navItem .navItemContainer .bottomRadius {
+  position: absolute;
+  right: 0;
+  transform: scaleY(0);
+  transition: transform var(--transition-timing) 0ms;
+}
+.navItem .navItemContainer .topRadius svg path,
+.navItem .navItemContainer .bottomRadius svg path {
+  transition: fill var(--transition-timing);
+}
+.navItem .navItemContainer .topRadius {
+  transform-origin: bottom;
+  top: 0;
+  translate: 0 -100%;
+}
+.navItem .navItemContainer .bottomRadius {
+  transform-origin: top;
+  bottom: 0;
+  translate: 0 100%;
+}
+.navItem .navItemContainer .navIcon {
+  width: 32px;
+  height: 32px;
+  filter: invert(0);
+  transition: filter 300ms calc(var(--transition-timing) * 2);
+}
+.navItem .navItemContainer .navLabel {
+  font-size: 24px;
+  transition: color 300ms calc(var(--transition-timing) * 2);
+}
+
+.navItem:hover .navItemContainer {
+  background-color: rgba(0, 0, 0, 0.1450980392);
+}
+
+.navItem.router-link-active {
+  width: 100%;
+  border-radius: 16px 0 0 16px;
+  background-color: var(--dynamic-background);
+  transition: background-color var(--transition-timing), border-radius 200ms 0ms, width 200ms 0ms linear;
+}
+.navItem.router-link-active .topRadius,
+.navItem.router-link-active .bottomRadius {
+  transform: scaleY(1);
+  transition: transform 500ms var(--transition-timing);
+}
+.navItem.router-link-active .navIcon {
+  width: 32px;
+  height: 32px;
+  filter: invert(0);
+  transition: filter 300ms 0ms;
+}
+.navItem.router-link-active .navLabel {
+  font-size: 24px;
+  transition: color 300ms 0ms;
+}
+
+.navItem.router-link-active:hover .navItemContainer {
+  background-color: transparent;
+}
