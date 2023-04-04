@@ -78,7 +78,22 @@ const textColor = computed(() => {
 			</div>
 		</div>
 	</aside>
-	<div class="colorDisplay">
-		<router-view />
+	<div class="colorDisplay" :style="{ backgroundColor: validatedColor }">
+		<router-view v-slot="{ Component }">
+			<transition name="fade">
+				<component :is="Component" />
+			</transition>
+		</router-view>
 	</div>
 </template>
+
+<style>
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

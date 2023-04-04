@@ -9,6 +9,7 @@ import './style/css/app.css'
 import './style/css/colorPicker.css'
 import './style/css/navItem.css'
 import './style/css/routerContainer.css'
+import './style/css/colorContainer.css'
 
 const app = createApp(App)
 

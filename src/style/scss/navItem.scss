@@ -1,162 +1,41 @@
 @import './variables.css';
 
-:root{
-    --dynamic-background: #000;
+:root {
+	--dynamic-background: #000;
 }
 
 .navItem {
-    --transition-timing: 300ms;
-    width: calc(100% - 16px);
-    display: block;
-    border-radius: 16px;
-    background-color: transparent;
-    transition: background-color var(--transition-timing) calc(var(--transition-timing)*2), border-radius var(--transition-timing) var(--transition-timing), width var(--transition-timing) var(--transition-timing);
-    text-decoration: none;
-    .navItemContainer{
-        border-radius: 16px;
-        width: 100%;
-        padding: 12px;
-        color: #000;
-        position: relative;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        transition: background-color 300ms;
-        gap: 12px;
-        .topRadius,
-        .bottomRadius {
-            position: absolute;
-            right: 0;
-            transform: scaleY(0);
-            transition: transform var(--transition-timing) 0ms;
-            svg path{
-                transition: fill var(--transition-timing);
-            }
-        }
-        .topRadius {
-            transform-origin: bottom;
-            top: 0;
-            translate: 0 -100%;
-        }
-        .bottomRadius {
-            transform-origin: top;
-            bottom: 0;
-            translate: 0 100%;
-        }
-        .navIcon {
-            width: 32px;
-            height: 32px;
-            filter: invert(0);
-            transition: filter 300ms calc(var(--transition-timing)*2);
-        }
-        .navLabel {
-            font-size: 24px;
-            transition: color 300ms calc(var(--transition-timing)*2);
-        }
-    }
+	width: 100%;
+	display: flex;
+    align-items: center;
+	text-decoration: none;
+    gap: 12px;
+	border-radius: 16px;
+    padding: 12px;
+	background-color: transparent;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
+	transition: background-color 300ms, box-shadow 300ms;
+    .navIcon {
+		width: 32px;
+		height: 32px;
+		filter: invert(0);
+		transition: filter 300ms 0ms;
+	}
+	.navLabel {
+		font-size: 24px;
+		transition: color 300ms 0ms;
+	}
 }
-.navItem:hover{
-    .navItemContainer{
-        background-color: #00000025;
-    }
+.navItem:hover {
+	background-color: #00000025;
 }
 .navItem.router-link-active {
-    width: 100%;
-    border-radius: 16px 0 0 16px;
-    background-color: var(--dynamic-background);
-    transition: background-color var(--transition-timing), border-radius 200ms 0ms, width 200ms 0ms linear;
-	.topRadius,
-	.bottomRadius {
-		transform: scaleY(1);
-        transition: transform 500ms var(--transition-timing);
+	background-color: var(--dynamic-background);
+	transition: background-color 300ms;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.navItem.router-link-active:hover {
+	.navItemContainer {
+		background-color: transparent;
 	}
-            .navIcon {
-            width: 32px;
-            height: 32px;
-            filter: invert(0);
-            transition: filter 300ms 0ms;
-        }
-        .navLabel {
-            font-size: 24px;
-            transition: color 300ms 0ms;
-        }
 }
-.navItem.router-link-active:hover{
-    .navItemContainer{
-        background-color: transparent;
-    }
-}
-// .navItem {
-//     --transition-timing: 700ms;
-//     --dynamic-background: #fff;
-//     padding-right: 16px;
-//     width: 100%;
-//     display: block;
-//     border-radius: 16px 0 0 16px;
-//     background-color: transparent;
-//     text-decoration: none;
-//     .navItemContainer{
-//         width: 100%;
-//         padding: 12px;
-//         background-color: transparent;
-//         color: #000;
-//         position: relative;
-//         display: flex;
-//         align-items: center;
-//         transition: background-color 300ms;
-//         gap: 12px;
-//         .topRadius,
-//         .bottomRadius {
-//             position: absolute;
-//             right: 0;
-//             transform: scaleY(1);
-//             opacity: 0;
-//             svg path{
-//                 transition: fill var(--transition-timing);
-//             }
-//         }
-//         .topRadius {
-//             transform-origin: bottom;
-//             top: 0;
-//             translate: 0 -100%;
-//         }
-//         .bottomRadius {
-//             transform-origin: top;
-//             bottom: 0;
-//             translate: 0 100%;
-//         }
-//         .navIcon {
-//             width: 32px;
-//             height: 32px;
-//             filter: invert(0);
-//             transition: filter 300ms var(--transition-timing);
-//         }
-//         .navLabel {
-//             font-size: 24px;
-//             transition: color 300ms var(--transition-timing);
-//         }
-//     }
-// }
-// .navItem:hover{
-//     cursor: pointer;
-//     .navItemContainer{
-//         background-color: #00000015;
-//     }
-// }
-// .navItem.router-link-active {
-//     padding: 0;
-//     background-color: var(--dynamic-background);
-// 	.topRadius,
-// 	.bottomRadius {
-// 		transform: scaleY(1);
-//         opacity: 1;
-//         transition: transform var(--transition-timing), opacity var(--transition-timing);
-// 	}
-// }
-
-// @keyframes activate {
-//     50%{
-//         padding: 0;
-//         border-radius: 16px 0 0 16px;
-//     }
-// }

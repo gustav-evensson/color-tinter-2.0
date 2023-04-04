@@ -4,8 +4,8 @@ import { ref, reactive, onMounted, computed, onUpdated, watch } from 'vue';
 import colorInput from './colorInput.vue';
 import { useColorStore } from '../stores/color';
 
-const globalColor = useColorStore()
-const emit = defineEmits(['emitColor', 'fetchName'])
+const globalColor = useColorStore();
+const emit = defineEmits(['emitColor', 'fetchName']);
 const colorGraph = ref(null);
 const colorPicker = ref(null);
 const showPicker = ref(false);
@@ -28,8 +28,8 @@ onMounted(() => {
 		state.y = (1 - savedHslaColor[2] / (1 - savedHslaColor[1] / 2)) * state.graphHeight;
 		state.alpha = savedHslaColor[3] * 100;
 		console.log('Got your saved Color here: ' + savedColor.toUpperCase());
-		emit('fetchName', savedColor)
-		globalColor.setColor(savedColor)
+		emit('fetchName', savedColor);
+		globalColor.setColor(savedColor);
 	} catch {
 		state.hue = 176 / 3.6;
 		state.x = 1 * state.graphWidth;
@@ -48,10 +48,13 @@ const color = computed(() => {
 	}
 });
 
-watch(() => color.value, (newColor) => {;
-	emit('emitColor', newColor)
-	globalColor.setColor(newColor)
-})
+watch(
+	() => color.value,
+	(newColor) => {
+		emit('emitColor', newColor);
+		globalColor.setColor(newColor);
+	}
+);
 
 onUpdated(() => {
 	localStorage.setItem('savedColor', toHex(color.value));
@@ -93,11 +96,11 @@ function setIndicators(inputColor) {
 	state.y = (1 - hslaArray[2] / (1 - hslaArray[1] / 2)) * state.graphHeight;
 	state.alpha = hslaArray[3] * 100;
 	// Fetch the name when we get the input emit
-	emit('fetchName', color.value)
+	emit('fetchName', color.value);
 }
 
-function slidersEmit(){
-	emit('fetchName', color.value)
+function slidersEmit() {
+	emit('fetchName', color.value);
 }
 
 function dragElement(elmnt) {
@@ -134,9 +137,9 @@ function dragElement(elmnt) {
 		// Stop moving when mouse button is released:
 		document.onmouseup = null;
 		document.onmousemove = null;
-		
+
 		// Fetch the color name when we releas the mouse button
-		emit('fetchName', color.value)
+		emit('fetchName', color.value);
 	}
 }
 </script>

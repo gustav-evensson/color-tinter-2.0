@@ -1,6 +1,6 @@
 <script setup>
-import { readableColor, readableColorIsBlack } from 'color2k';
-import { watch, ref, computed, onMounted } from 'vue';
+import { readableColor, readableColorIsBlack, parseToHsla } from 'color2k';
+import { watch, computed } from 'vue';
 import router from '../router/index.js';
 
 const root = document.querySelector(':root');
@@ -14,7 +14,8 @@ const props = defineProps({
 watch(
 	() => props.color,
 	(newColor) => {
-		root.style.setProperty('--dynamic-background', props.color);
+		let parsedColor = parseToHsla(newColor)
+		root.style.setProperty('--dynamic-background', `hsla(${parsedColor[0]}, ${parsedColor[1]*100}%, ${parsedColor[2]*100}%, 1)`);
 	}
 );
 
@@ -26,9 +27,16 @@ const textColor = computed(() => {
 	}
 });
 
-const isActive = computed(() => {
-	return router.currentRoute.value.name == props.routerTo;
-});
+const itemBG = computed(() => {
+	if (router.currentRoute.value.name == props.routerTo){
+		let parsedColor = parseToHsla(props.color)
+		return `hsla(${parsedColor[0]}, ${parsedColor[1]*100}%, 95%, 1)`
+	}
+	else{
+		return '#fff'
+	}
+})
+
 
 const invert = computed(() => {
 	if (router.currentRoute.value.name == props.routerTo) {
@@ -45,19 +53,7 @@ const invert = computed(() => {
 
 <template>
 	<router-link ref="navItem" class="navItem" :to="'/' + props.routerTo">
-		<div class="navItemContainer">
-			<div class="topRadius">
-				<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path fill-rule="evenodd" clip-rule="evenodd" d="M0 32C17.6731 32 32 17.6731 32 0V32H0Z" :fill="props.color" />
-				</svg>
-			</div>
-			<img :style="{ filter: invert }" class="navIcon" :src="props.icon" />
-			<p :style="{ color: textColor }" class="navLabel">{{ props.label }}</p>
-			<div class="bottomRadius">
-				<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0C17.6731 0 32 14.3269 32 32V0H0Z" :fill="props.color" />
-				</svg>
-			</div>
-		</div>
+		<img :style="{ filter: invert }" class="navIcon" :src="props.icon" />
+		<p :style="{ color: textColor }" class="navLabel">{{ props.label }}</p>
 	</router-link>
 </template>

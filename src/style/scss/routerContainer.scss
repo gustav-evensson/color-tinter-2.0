@@ -3,20 +3,32 @@
 	height: 100%;
 	display: flex;
 	position: relative;
-	.colorContainer {
-		height: 100%;
+	flex-direction: column;
+	header{
+		height: 48px;
 		width: 100%;
-		transition: background-color 300ms;
-		color: white;
+		flex-shrink: 0;
+		display: none;
+		align-items: center;
+		gap: 16px;
+		h4{
+			font-size: 24px;
+			font-weight: 400;
+		}
 	}
-	.overLay {
-		position: absolute;
+	.colorSpectrum{
 		width: 100%;
 		height: 100%;
-		top: 0;
-		left: 0;
-		transition: background-color 300ms;
-		animation: fadeOut 700ms forwards;
+		position: relative;
+		display: flex;
+		.overLay{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			animation: fadeOut 500ms forwards;
+		}
 	}
 }
 
