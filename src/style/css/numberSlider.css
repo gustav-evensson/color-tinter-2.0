@@ -1,0 +1,25 @@
+.numberSlider {
+  width: 100%;
+  position: relative;
+  padding: 15px 0;
+}
+.numberSlider .sliderTrack {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #ccc;
+}
+.numberSlider .sliderThumb {
+  position: absolute;
+  top: 50%;
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  translate: -50% -50%;
+  background-color: #00ffec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: left 100ms;
+}

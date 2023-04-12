@@ -4,5 +4,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    .colorActions{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        opacity: 0;
+        transition: opacity 300ms;
+        button{
+            opacity: 0.4;
+            background-color: transparent;
+            border: none;
+            transition: opacity 300ms;
+        }
+        button:hover{
+            cursor: pointer;
+            opacity: 1;
+        }
+        p{
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    }
+}
+.colorContainer:hover{
+    .colorActions{
+        opacity: 1;
+    }
 }

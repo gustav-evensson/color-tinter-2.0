@@ -34,7 +34,7 @@
 	box-shadow: 0 0 12px -5px hsl(0, 0, 0, 0);
 	transition: height 300ms, padding 300ms, border-radius 300ms, translate 300ms, box-shadow 300ms;
 	*{flex-shrink: 0;}
-	z-index: 2;
+	z-index: 3;
 }
 .colorInput {
 	border-radius: 16px;

@@ -22,11 +22,11 @@
   scale: 0.9;
 }
 
-.paddingContainer {
-  padding-right: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.divider {
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background-color: #ececec;
 }
 
 .sideBar {
@@ -36,10 +36,12 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-right: 16px;
 }
 .sideBar .colorPickerContainer {
   position: relative;
   height: 60px;
+  flex-shrink: 0;
 }
 .sideBar .currentColorContainer {
   border-radius: 16px;
@@ -65,16 +67,17 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-right: 16px;
 }
 .sideBar .bottomSection {
   align-self: end;
   width: 100%;
   display: flex;
   align-items: center;
+  gap: 16px;
 }
 .sideBar .bottomSection .sliderContainer {
   width: 100%;
+  padding: 0 16px;
 }
 .sideBar .bottomSection .exportContainer {
   width: 64px;

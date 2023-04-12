@@ -22,7 +22,7 @@
   height: 60px;
   box-shadow: 0 0 12px -5px hsla(0, 0%, 0%, 0);
   transition: height 300ms, padding 300ms, border-radius 300ms, translate 300ms, box-shadow 300ms;
-  z-index: 2;
+  z-index: 3;
 }
 .colorPicker * {
   flex-shrink: 0;

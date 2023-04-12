@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 
 export const useColorStore = defineStore('globalColor', () => {
 	const getColor = ref('');
-	const getColorCount = ref(10)
+	const getColorCount = ref(5);
 	function setColor(newColor) {
 		getColor.value = newColor;
 	}
@@ -12,4 +12,4 @@ export const useColorStore = defineStore('globalColor', () => {
 	}
 
 	return { getColor, setColor, setColorCount, getColorCount };
-});
+}, {persist: true});
