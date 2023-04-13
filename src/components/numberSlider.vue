@@ -1,7 +1,9 @@
 <script setup>
 import { readableColor } from 'color2k';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
+import { useColorStore } from '../stores/color';
 
+const globalColor = useColorStore()
 const props = defineProps({
 	step: Number,
 	min: Number,
@@ -12,7 +14,7 @@ const emits = defineEmits(['emitValue']);
 
 const numberSlider = ref(null);
 const state = reactive({
-	sliderValue: 300,
+	sliderValue: undefined,
 	sliderWidth: 0,
 	step: 1,
 	min: 0,
@@ -24,6 +26,7 @@ onMounted(() => {
 	state.max = props.max || state.max;
 	state.min = props.min || state.min;
 	state.sliderWidth = numberSlider.value.offsetWidth;
+	state.sliderValue = ((globalColor.getColorCount - state.min) / (state.max - state.min)) * state.sliderWidth
 	dragElement(numberSlider.value);
 });
 
@@ -52,12 +55,15 @@ watch(
 
 function dragElement(elmnt) {
 	elmnt.onmousedown = dragMouseDown;
+	elmnt.ontouchstart = dragMouseDown;
 	elmnt.onmouseover = readyToScroll;
 	function dragMouseDown(e) {
 		elmnt.childNodes[1].style.transition = 'none'
 		document.onmouseup = closeDragElement;
+		document.ontouchend =closeDragElement
 		// Call the elementDrag function whenever the cursor moves:
 		document.onmousemove = elementDrag;
+		document.ontouchmove = elementTouchDrag;
 	}
 
 	function readyToScroll() {
@@ -74,6 +80,16 @@ function dragElement(elmnt) {
 		} else if (e.clientX - rect.left < 0) {
 			state.sliderValue = 0;
 		} else if (e.clientX - rect.left > state.sliderWidth) {
+			state.sliderValue = state.sliderWidth;
+		}
+	}
+	function elementTouchDrag(e) {
+		var rect = elmnt.getBoundingClientRect();
+		if (e.touches[0].clientX - rect.left > 0 && e.touches[0].clientX - rect.left < state.sliderWidth) {
+			state.sliderValue = e.touches[0].clientX - rect.left;
+		} else if (e.touches[0].clientX - rect.left < 0) {
+			state.sliderValue = 0;
+		} else if (e.touches[0].clientX - rect.left > state.sliderWidth) {
 			state.sliderValue = state.sliderWidth;
 		}
 	}
@@ -94,6 +110,8 @@ function dragElement(elmnt) {
 		elmnt.childNodes[1].style.transition = 'left 100ms'
 		document.onmouseup = null;
 		document.onmousemove = null;
+		document.ontouchmove = null;
+		document.ontouchend = null;
 	}
 
 	function closeScrollElement() {

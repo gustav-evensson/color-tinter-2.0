@@ -4,6 +4,9 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+  background-color: #fff;
 }
 .routerContainer header {
   height: 48px;
@@ -13,30 +16,108 @@
   align-items: center;
   gap: 16px;
 }
+.routerContainer header button {
+  background-color: transparent;
+  border: none;
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+.routerContainer header button .topLine, .routerContainer header button .bottomLine {
+  --transition-timing: 200ms;
+  transition: rotate var(--transition-timing), top var(--transition-timing) var(--transition-timing), bottom var(--transition-timing) var(--transition-timing), translate var(--transition-timing) var(--transition-timing);
+  width: 80%;
+  height: 2px;
+  border-radius: 1px;
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  rotate: 0deg;
+  background-color: #000;
+}
+.routerContainer header button .topLine {
+  top: 25%;
+}
+.routerContainer header button .bottomLine {
+  bottom: 25%;
+}
+.routerContainer header .close .topLine, .routerContainer header .close .bottomLine {
+  transition: rotate var(--transition-timing) var(--transition-timing), top var(--transition-timing), bottom var(--transition-timing), translate var(--transition-timing);
+}
+.routerContainer header .close .topLine {
+  rotate: 45deg;
+  top: 50%;
+  translate: -50% -50%;
+}
+.routerContainer header .close .bottomLine {
+  rotate: -45deg;
+  bottom: 50%;
+  translate: -50% 50%;
+}
 .routerContainer header h4 {
   font-size: 24px;
   font-weight: 400;
+}
+@keyframes toCloseTop {
+  0% {
+    top: 25%;
+    translate: -50% 0;
+    rotate: 0deg;
+  }
+  50% {
+    top: 50%;
+    translate: -50% -50%;
+    rotate: 0deg;
+  }
+  75% {
+    top: 50%;
+    translate: -50% -50%;
+    rotate: 0deg;
+  }
+  100% {
+    translate: -50% 8px;
+    rotate: 45deg;
+  }
+}
+@keyframes toCloseBottom {
+  0% {
+    bottom: 25%;
+    translate: -50% 0;
+    rotate: 0deg;
+  }
+  50% {
+    bottom: 50%;
+    translate: -50% 50%;
+    rotate: 0deg;
+  }
+  75% {
+    bottom: 50%;
+    translate: -50% 50%;
+    rotate: 0deg;
+  }
+  100% {
+    translate: -50% -8px;
+    rotate: -45deg;
+  }
 }
 .routerContainer .colorSpectrum {
   width: 100%;
   height: 100%;
   position: relative;
   display: flex;
-}
-.routerContainer .colorSpectrum .overLay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  animation: fadeOut 500ms forwards;
+  overflow: hidden;
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
+@media screen and (max-width: 1500px) {
+  .routerContainer header {
+    display: flex;
   }
-  to {
-    opacity: 0;
+  .routerContainer .colorSpectrum {
+    border-radius: 16px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .routerContainer .colorSpectrum {
+    flex-direction: column;
   }
 }

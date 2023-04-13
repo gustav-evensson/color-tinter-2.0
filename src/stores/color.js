@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 
 export const useColorStore = defineStore('globalColor', () => {
 	const getColor = ref('');
+	const doFetch = ref(false);
 	const getColorCount = ref(5);
 	function setColor(newColor) {
 		getColor.value = newColor;
@@ -10,6 +11,9 @@ export const useColorStore = defineStore('globalColor', () => {
 	function setColorCount(newColorCount) {
 		getColorCount.value = newColorCount;
 	}
-
-	return { getColor, setColor, setColorCount, getColorCount };
+	function setDoFetch(){
+		console.log('didFetch')
+		doFetch.value = !doFetch.value
+	}
+	return { getColor, setColor, setColorCount, getColorCount ,doFetch, setDoFetch };
 }, {persist: true});

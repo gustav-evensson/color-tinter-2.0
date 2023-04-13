@@ -55,6 +55,12 @@ watch(
 		globalColor.setColor(newColor);
 	}
 );
+watch(
+	() => globalColor.getColor,
+	(newColor) => {
+		setIndicatorsNoFetch(newColor)
+	}
+);
 
 onUpdated(() => {
 	localStorage.setItem('savedColor', toHex(color.value));
@@ -98,6 +104,14 @@ function setIndicators(inputColor) {
 	// Fetch the name when we get the input emit
 	emit('fetchName', color.value);
 }
+function setIndicatorsNoFetch(inputColor) {
+	const hslaArray = parseToHsla(inputColor);
+	// Calculateing the x, y, hue and aplha value from the color to the sliders
+	state.hue = hslaArray[0] / 3.6;
+	state.x = hslaArray[1] * state.graphWidth;
+	state.y = (1 - hslaArray[2] / (1 - hslaArray[1] / 2)) * state.graphHeight;
+	state.alpha = hslaArray[3] * 100;
+}
 
 function slidersEmit() {
 	emit('fetchName', color.value);
@@ -105,11 +119,14 @@ function slidersEmit() {
 
 function dragElement(elmnt) {
 	elmnt.onmousedown = dragMouseDown;
+	elmnt.ontouchstart = dragMouseDown
 
 	function dragMouseDown(e) {
 		document.onmouseup = closeDragElement;
+		document.ontouchend = closeDragElement
 		// Call the elementDrag function whenever the cursor moves:
 		document.onmousemove = elementDrag;
+		document.ontouchmove = elementTouchDrag
 	}
 
 	function elementDrag(e) {
@@ -132,11 +149,31 @@ function dragElement(elmnt) {
 			state.x = state.graphWidth;
 		}
 	}
+	function elementTouchDrag(e) {
+		var rect = elmnt.getBoundingClientRect();
+		// Setting the states x and y value inside the graph element
+		if (e.touches[0].clientY - rect.top > 0 && e.touches[0].clientY - rect.top < state.graphHeight) {
+			state.y = e.touches[0].clientY - rect.top;
+		} else if (e.touches[0].clientY - rect.top < 0) {
+			state.y = 0;
+		} else if (e.touches[0].clientY - rect.top > state.graphHeight) {
+			state.y = state.graphHeight;
+		}
+		if (e.touches[0].clientX - rect.left > 0 && e.touches[0].clientX - rect.left < state.graphWidth) {
+			state.x = e.touches[0].clientX - rect.left;
+		} else if (e.touches[0].clientX - rect.left < 0) {
+			state.x = 0;
+		} else if (e.touches[0].clientX - rect.left > state.graphWidth) {
+			state.x = state.graphWidth;
+		}
+	}
 
 	function closeDragElement() {
 		// Stop moving when mouse button is released:
 		document.onmouseup = null;
 		document.onmousemove = null;
+		document.ontouchend = null;
+		document.ontouchmove = null
 
 		// Fetch the color name when we releas the mouse button
 		emit('fetchName', color.value);

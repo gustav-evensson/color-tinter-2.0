@@ -1,15 +1,22 @@
 <script setup>
-import { onMounted, watch, ref } from 'vue';
+import { onMounted, watch, ref, reactive } from 'vue';
 import ColorSpectrum from '../components/colorSpectrum.vue';
 import { useColorStore } from '../stores/color.js';
+import { useMenuCtrl } from '../stores/menu.js';
 
 const color = ref('#000');
 const colorCount = ref(10);
 const globalColor = useColorStore();
+const menuCtrl = useMenuCtrl()
+
+const state = reactive({
+	isExpanded: false
+})
 
 onMounted(() => {
 	color.value = globalColor.getColor;
     colorCount.value = globalColor.getColorCount
+	state.isExpanded = menuCtrl.menuOpen
 });
 
 watch(
@@ -24,16 +31,18 @@ watch(
 		colorCount.value = newColorCount;
 	}
 );
+function toggleMenu(){
+	menuCtrl.toggleMenu()
+	state.isExpanded = !state.isExpanded
+}
 </script>
 
 <template>
 	<div class="routerContainer">
 		<header>
-			<button>
-				<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<line x1="5.75" y1="11.25" x2="26.25" y2="11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" />
-					<line x1="5.75" y1="19.25" x2="26.25" y2="19.25" stroke="black" stroke-width="1.5" stroke-linecap="round" />
-				</svg>
+			<button @click="toggleMenu()" :class="{ close: state.isExpanded }">
+				<div class="topLine"></div>
+				<div class="bottomLine"></div>
 			</button>
             <h4>Tones</h4>
 		</header>

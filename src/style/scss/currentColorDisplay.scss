@@ -4,7 +4,11 @@
     width: 100%;
     height: var(--closed-height);
     flex-shrink: 0;
+    text-align: left;
     z-index: 2;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
     .currentColorDisplay{
         position: absolute;
         top: 0;
@@ -59,11 +63,13 @@
         }
     }
 }
-.currentColorDisplay:hover{
-    height: 359px;
-    box-shadow: 0 0 10px rgba(0,0,0,.3);
-    .colorCodes{
-        opacity: 1;
-        pointer-events: all;
+.currentColorDisplayContainer{
+    .expanded{
+        height: 359px;
+        box-shadow: 0 0 10px rgba(0,0,0,.3);
+        .colorCodes{
+            opacity: 1;
+            pointer-events: all;
+        }
     }
 }

@@ -1,36 +1,55 @@
 <script setup>
-import AlertsJS from 'alerts.js'
-import { computed, reactive } from 'vue';
+import { computed, onMounted, reactive, watch } from 'vue';
 import { toHex, readableColor, toHsla } from 'color2k';
 import { useColorStore } from './stores/color';
+import { useMenuCtrl } from './stores/menu';
 import colorPicker from './components/colorPicker.vue';
 import navItem from './components/navItem.vue';
 import numberSlider from './components/numberSlider.vue';
 import currentColorDisplay from './components/currentColorDisplay.vue';
+import sideExportBtn from './components/sideExportBtn.vue';
 
-const alertsJS = new AlertsJS({
-  position: 'top-right',
-  wallGap: 32,
-  scaling: 0.8,
-//   colors: {
-//     textColor: { dark: '#FFFFFF', light: '#000000' },
-//     bgColor: { dark: '#303030', light: '#FFFFFF' },
-//     error: '#d64747',
-//     warning: '#d27722',
-//     success: '#0ba808',
-//     alert: '#5274ca',
-//   },
-});
-
-const globalColor = useColorStore()
+const menuCtrl = useMenuCtrl();
+const globalColor = useColorStore();
 const state = reactive({
 	currentColor: '',
 	colorName: '',
 	isActive: false,
+	isMenuOpen: false,
 });
 function getColor(emitColor) {
 	state.currentColor = emitColor;
 }
+
+onMounted(() => {
+	state.isMenuOpen = menuCtrl.menuOpen;
+	if (window.innerWidth > 1500) {
+		state.isMenuOpen = false;
+	}
+});
+
+watch(
+	() => menuCtrl.menuOpen,
+	(menuOpen) => {
+		state.isMenuOpen = menuOpen;
+	}
+);
+watch(
+	() => globalColor.getColor,
+	(newCount) => {
+		state.currentColor = newCount;
+	}
+);
+watch(
+	() => globalColor.doFetch,
+	(newCount) => {
+		console.log(toHex(state.currentColor));
+		fetch(`https://www.thecolorapi.com/id?hex=${toHex(state.currentColor).slice(1)}`)
+			.then((res) => res.json())
+			.then((data) => (state.colorName = data.name.value))
+			.catch((err) => console.error(err));
+	}
+);
 
 function getColorName(emitColor) {
 	let hexFormat = toHex(emitColor).slice(1);
@@ -43,8 +62,8 @@ function getColorName(emitColor) {
 		.catch((err) => console.error(err));
 }
 
-function getCount(count){
-	globalColor.setColorCount(count.value)
+function getCount(count) {
+	globalColor.setColorCount(count.value);
 }
 
 const validatedColor = computed(() => {
@@ -58,11 +77,6 @@ const validatedColor = computed(() => {
 const textColor = computed(() => {
 	return readableColor(validatedColor.value);
 });
-
-function sendAlert(msg){
-	console.log('sendAlert')
-	alertsJS.createAlert(msg, 'success', 3000)
-}
 </script>
 
 <template>
@@ -70,35 +84,22 @@ function sendAlert(msg){
 		<div class="colorPickerContainer">
 			<color-picker @emitColor="getColor" @fetchName="getColorName" />
 		</div>
-		<current-color-display @sendAlert="sendAlert" :color="validatedColor" :colorName="state.colorName"/>
-		<div class="divider"></div>
+		<current-color-display :color="validatedColor" :colorName="state.colorName" />
+		<!-- <div class="divider"></div> -->
 		<div class="navItems">
-			<nav-item icon="src/assets/tints.svg" label="Tints" :color="validatedColor" routerTo="tints" />
+			<nav-item icon="src/assets/tints.svg" label="Tints" :color="validatedColor" routerTo="" />
 			<nav-item icon="src/assets/shades.svg" label="Shades" :color="validatedColor" routerTo="shades" />
 			<nav-item icon="src/assets/tones.svg" label="Tones" :color="validatedColor" routerTo="tones" />
+			<nav-item icon="src/assets/contrast.svg" label="Contrast" :color="validatedColor" routerTo="contrast" />
 		</div>
 		<div class="bottomSection">
 			<div class="sliderContainer">
-				<number-slider @emit-value="getCount" :step="1" :min="2" :max="10" :color="validatedColor"/>
+				<number-slider @emit-value="getCount" :step="1" :min="2" :max="10" :color="validatedColor" />
 			</div>
+			<side-export-btn :color="validatedColor" />
 		</div>
 	</aside>
-	<div class="colorDisplay" :style="{ backgroundColor: validatedColor }">
-		<router-view v-slot="{ Component }">
-			<transition name="fade">
-				<component :is="Component" />
-			</transition>
-		</router-view>
+	<div class="colorDisplay" :class="{ menuOpen: state.isMenuOpen }">
+		<router-view />
 	</div>
 </template>
-
-<style>
-.fade-enter-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

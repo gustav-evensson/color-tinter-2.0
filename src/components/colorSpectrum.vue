@@ -5,6 +5,7 @@ import colorContainer from './colorContainer.vue';
 import { useColorStore } from '../stores/color';
 
 const globalColor = useColorStore();
+const emits = defineEmits(['passFetchName'])
 const props = defineProps({
 	spectrum: String,
 	color: String,
@@ -72,8 +73,8 @@ function tonesArray(clr) {
 </script>
 
 <template>
-	<div class="colorSpectrum">
-		<color-container v-for="color in colorArray" :key="color" :color="color" />
+	<div class="colorSpectrum" :style="{ backgroundColor: props.color }">
+		<color-container v-for="color, idx in colorArray" :key="color" :color="color" :ani-delay="idx*50" />
 	</div>
 </template>
 

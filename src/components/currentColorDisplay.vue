@@ -1,14 +1,22 @@
 <script setup>
-import { hsla, readableColor, toHex, toHsla, toRgba } from 'color2k';
-import { computed } from 'vue';
+import { ajs } from '../main'
+import { parseToHsla, readableColor, toHex, toHsla, toRgba, hsla } from 'color2k';
+import { computed, reactive } from 'vue';
 
 const props = defineProps({
     color: String,
     colorName: String
 })
+const state = reactive({
+    isExpanded: false
+})
 
 const emits = defineEmits(['sendAlert'])
 
+const nonTransparentColor = computed(() => {
+    const parsedColor = parseToHsla(props.color)
+    return hsla(parsedColor[0], parsedColor[1], parsedColor[2], 1)
+})
 const hexColor = computed(() => {
     return toHex(props.color).toUpperCase()
 })
@@ -24,14 +32,14 @@ const textColor = computed(() => {
 
 function copyColorCode(colorCode){
     navigator.clipboard.writeText(colorCode);
-    emits('sendAlert', `Copied ${colorCode}!`)
+    ajs.createAlert(`Copied ${colorCode}!`, 'success', 3000)
+    
 }
-
 </script>
 
 <template>
-    <div class="currentColorDisplayContainer">
-        <div class="currentColorDisplay" :style="{backgroundColor: props.color}">
+    <button @click="state.isExpanded = !state.isExpanded" class="currentColorDisplayContainer">
+        <div class="currentColorDisplay" :style="{backgroundColor: nonTransparentColor}" :class="{expanded: state.isExpanded}">
             <div class="constantView">
                 <h3 :style="{color: textColor}">{{ props.colorName }}</h3>
                 <p :style="{color: textColor}">{{ hexColor }}</p>
@@ -57,7 +65,7 @@ function copyColorCode(colorCode){
                 </div>
             </div>
         </div>
-    </div>
+    </button>
 </template>
 
 <style scoped></style>

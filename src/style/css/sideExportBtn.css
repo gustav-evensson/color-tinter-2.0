@@ -1,0 +1,98 @@
+.sideExportBtn {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 32px 0 0 32px;
+  position: relative;
+  translate: 16px 0;
+}
+.sideExportBtn .toggleExpandBtn {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  display: grid;
+  grid-template-areas: "stack";
+  place-items: center;
+  cursor: pointer;
+}
+.sideExportBtn .toggleExpandBtn .toggleIcon {
+  grid-area: stack;
+  width: 32px;
+  height: 32px;
+}
+.sideExportBtn .toggleExpandBtn .exportIcon, .sideExportBtn .toggleExpandBtn .closeIcon {
+  transition: scale 200ms;
+}
+.sideExportBtn .toggleExpandBtn .exportIcon {
+  scale: 1;
+}
+.sideExportBtn .toggleExpandBtn .closeIcon {
+  scale: 0;
+}
+.sideExportBtn .toggleExpandBtn .exportIcon.hide {
+  scale: 0;
+}
+.sideExportBtn .toggleExpandBtn .closeIcon.show {
+  scale: 1;
+}
+.sideExportBtn .arc {
+  position: absolute;
+  top: 0;
+  right: 0;
+  translate: 0 -100%;
+}
+.sideExportBtn .exportActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  top: -8px;
+  right: 8px;
+  translate: 0 -100%;
+  pointer-events: none;
+}
+.sideExportBtn .exportActions .exportAction {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: none;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  translate: 150% 0;
+  opacity: 1;
+  font-size: 14px;
+  cursor: pointer;
+}
+.sideExportBtn .exportActions :nth-child(3) {
+  transition: scale 200ms, translate 200ms 100ms, opacity 200ms 100ms;
+}
+.sideExportBtn .exportActions :nth-child(2) {
+  transition: scale 200ms, translate 200ms 200ms, opacity 200ms 200ms;
+}
+.sideExportBtn .exportActions :nth-child(1) {
+  transition: scale 200ms, translate 200ms 300ms, opacity 200ms 300ms;
+}
+.sideExportBtn .exportActions.expanded {
+  pointer-events: all;
+}
+.sideExportBtn .exportActions.expanded .exportAction {
+  opacity: 1;
+  scale: 1;
+  translate: 0 0;
+}
+.sideExportBtn .exportActions.expanded .exportAction:hover {
+  scale: 1.1;
+}
+.sideExportBtn .exportActions.expanded .exportAction:active {
+  scale: 0.9;
+}
+
+@media screen and (max-width: 1500px) {
+  .sideExportBtn {
+    display: none;
+  }
+}

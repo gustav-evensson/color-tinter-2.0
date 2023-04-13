@@ -27,17 +27,6 @@ const textColor = computed(() => {
 	}
 });
 
-const itemBG = computed(() => {
-	if (router.currentRoute.value.name == props.routerTo){
-		let parsedColor = parseToHsla(props.color)
-		return `hsla(${parsedColor[0]}, ${parsedColor[1]*100}%, 95%, 1)`
-	}
-	else{
-		return '#fff'
-	}
-})
-
-
 const invert = computed(() => {
 	if (router.currentRoute.value.name == props.routerTo) {
 		if (readableColorIsBlack(props.color)) {
@@ -52,7 +41,7 @@ const invert = computed(() => {
 </script>
 
 <template>
-	<router-link ref="navItem" class="navItem" :to="'/' + props.routerTo">
+	<router-link ref="navItem" class="navItem" :to="'/' + props.routerTo || ''">
 		<img :style="{ filter: invert }" class="navIcon" :src="props.icon" />
 		<p :style="{ color: textColor }" class="navLabel">{{ props.label }}</p>
 	</router-link>
