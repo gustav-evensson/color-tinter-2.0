@@ -42,7 +42,7 @@
 .combinationsNavItem {
 	position: relative;
 	z-index: 1;
-	background-color: var(--combinations-background);
+	background-color: #fff;
 	.combinations {
 		position: absolute;
 		bottom: 0;
@@ -64,6 +64,10 @@
 			align-items: center;
 			transition: scale 300ms, background-color 300ms;
 			cursor: pointer;
+			img{
+				width: 24px;
+				height: 24px;
+			}
 		}
 		.combinationsLink:hover {
 			background-color: #00000025;
@@ -71,27 +75,28 @@
 		.combinationsLink.router-link-active {
 			background-color: var(--dynamic-background);
 		}
-		:nth-child(1) {
-			transition-delay: 20ms;
-		}
-		:nth-child(2) {
-			transition-delay: 40ms;
-		}
-		:nth-child(3) {
-			transition-delay: 60ms;
-		}
-		:nth-child(4) {
-			transition-delay: 80ms;
-		}
-		:nth-child(5) {
-			transition-delay: 100ms;
-		}
-		:nth-child(6) {
-			transition-delay: 120ms;
-		}
+		// :nth-child(1) {
+		// 	transition-delay: 20ms;
+		// }
+		// :nth-child(2) {
+		// 	transition-delay: 40ms;
+		// }
+		// :nth-child(3) {
+		// 	transition-delay: 60ms;
+		// }
+		// :nth-child(4) {
+		// 	transition-delay: 80ms;
+		// }
+		// :nth-child(5) {
+		// 	transition-delay: 100ms;
+		// }
+		// :nth-child(6) {
+		// 	transition-delay: 120ms;
+		// }
 	}
 }
 .showCombinations{
+	background-color: var(--combinations-background);
 	.combinations{
 		pointer-events: all;
 		.combinationsLink{

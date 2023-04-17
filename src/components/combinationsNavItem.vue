@@ -2,10 +2,12 @@
 import { readableColor, readableColorIsBlack, parseToHsla } from 'color2k';
 import { watch, computed, onMounted, ref, onUpdated } from 'vue';
 import router from '../router/index.js';
-import ColorSpectrum from './colorSpectrum.vue';
+import combinationsLink from './combinationsLink.vue';
 
 const root = document.querySelector(':root');
 const showCombinations = ref(true);
+// const invert = ref('invert(0)')
+// const textColor = ref('#000')
 const props = defineProps({
 	icon: String,
 	label: String,
@@ -14,10 +16,10 @@ const props = defineProps({
 });
 const childRoutes = ['complementary', 'splitComplementary', 'analogous', 'triadic', 'tetradic', 'square'];
 
-onMounted(() => {
-	let parsedColor = parseToHsla(props.color);
-	root.style.setProperty('--combinations-background', `hsla(${parsedColor[0]}, ${parsedColor[1] * 100}%, ${parsedColor[2] * 100}%, 1)`);
-});
+// onMounted(() => {
+// 	let parsedColor = parseToHsla(props.color);
+// 	root.style.setProperty('--combinations-background', `hsla(${parsedColor[0]}, ${parsedColor[1] * 100}%, ${parsedColor[2] * 100}%, 1)`);
+// });
 
 watch(
 	() => props.color,
@@ -27,46 +29,8 @@ watch(
 	}
 );
 
-// watch(
-// 	() => router.currentRoute.name,
-// 	(routerName) => {
-// 		console.log(showCombinations.value);
-// 		if (childRoutes.includes(routerName)) {
-// 			let parsedColor = parseToHsla(props.color);
-// 			root.style.setProperty('--combinations-background', `hsla(${parsedColor[0]}, ${parsedColor[1] * 100}%, ${parsedColor[2] * 100}%, 1)`);
-// 			showCombinations.value = true;
-// 		} else {
-// 			root.style.setProperty('--combinations-background', `#000`);
-// 			showCombinations.value = false;
-// 		}
-// 	}
-// );
-
-router.afterEach((to) => {
-	if (childRoutes.includes(to.name)) {
-		let parsedColor = parseToHsla(props.color);
-		root.style.setProperty('--combinations-background', `hsla(${parsedColor[0]}, ${parsedColor[1] * 100}%, ${parsedColor[2] * 100}%, 1)`);
-		showCombinations.value = true;
-	} else {
-		root.style.setProperty('--combinations-background', `#fff`);
-		showCombinations.value = false;
-	}
-});
-
-// onUpdated(() => {
-// 	console.log('updeated');
-// 	if (childRoutes.includes(router.currentRoute.name)) {
-// 		let parsedColor = parseToHsla(props.color);
-// 		root.style.setProperty('--combinations-background', `hsla(${parsedColor[0]}, ${parsedColor[1] * 100}%, ${parsedColor[2] * 100}%, 1)`);
-// 		showCombinations.value = true;
-// 	} else {
-// 		root.style.setProperty('--combinations-background', `#000`);
-// 		showCombinations.value = false;
-// 	}
-// });
-
 const textColor = computed(() => {
-	if (router.currentRoute.value.name == props.routerTo) {
+	if (childRoutes.includes(router.currentRoute.value.name)) {
 		return readableColor(props.color);
 	} else {
 		return '#000';
@@ -74,7 +38,7 @@ const textColor = computed(() => {
 });
 
 const invert = computed(() => {
-	if (router.currentRoute.value.name == props.routerTo) {
+	if (childRoutes.includes(router.currentRoute.value.name)) {
 		if (readableColorIsBlack(props.color)) {
 			return 'invert(0)';
 		} else {
@@ -84,6 +48,26 @@ const invert = computed(() => {
 		return 'invert(0)';
 	}
 });
+
+router.afterEach((to) => {
+	if (childRoutes.includes(to.name)) {
+		// let parsedColor = parseToHsla(props.color);
+		// root.style.setProperty('--combinations-background', `hsla(${parsedColor[0]}, ${parsedColor[1] * 100}%, ${parsedColor[2] * 100}%, 1)`);
+		showCombinations.value = true;
+		// textColor.value = readableColor(props.color)
+		// if (readableColorIsBlack(props.color)) {
+		// 	invert.value = 'invert(0)';
+		// } else {
+		// 	invert.value = 'invert(1)';
+		// }
+	} else {
+		// root.style.setProperty('--combinations-background', `#fff`);
+		showCombinations.value = false;
+		// invert.value = 'invert(0)';
+		// textColor.value = '#000'
+	}
+});
+
 </script>
 
 <template>
@@ -91,7 +75,13 @@ const invert = computed(() => {
 		<img :style="{ filter: invert }" class="navIcon" :src="props.icon" />
 		<p :style="{ color: textColor }" class="navLabel">{{ props.label }}</p>
 		<div class="combinations">
-			<router-link class="combinationsLink" to="/complementary" :style="{ color: textColor }">
+			<combinations-link :color="props.color" icon="../../src/assets/Complementary.svg" routerTo="complementary"/>
+			<combinations-link :color="props.color" icon="../../src/assets/SplitComplementary.svg" routerTo="splitComplementary"/>
+			<combinations-link :color="props.color" icon="../../src/assets/Analogous.svg" routerTo="analogous"/>
+			<combinations-link :color="props.color" icon="../../src/assets/Triadic.svg" routerTo="triadic"/>
+			<combinations-link :color="props.color" icon="../../src/assets/Tetradic.svg" routerTo="tetradic"/>
+			<combinations-link :color="props.color" icon="../../src/assets/Square.svg" routerTo="square"/>
+			<!-- <router-link class="combinationsLink" to="/complementary" :style="{ color: textColor }">
 				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<circle cx="12.375" cy="6" r="2.25" :fill="textColor" />
 					<circle cx="12.375" cy="18" r="2.25" :fill="textColor" />
@@ -133,7 +123,7 @@ const invert = computed(() => {
 					<circle cx="18.625" cy="12" r="2.25" :fill="textColor" />
 					<circle cx="12.625" cy="18" r="2.25" :fill="textColor" />
 				</svg>
-			</router-link>
+			</router-link> -->
 		</div>
 	</router-link>
 </template>

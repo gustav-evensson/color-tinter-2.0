@@ -43,7 +43,7 @@
 .combinationsNavItem {
   position: relative;
   z-index: 1;
-  background-color: var(--combinations-background);
+  background-color: #fff;
 }
 .combinationsNavItem .combinations {
   position: absolute;
@@ -68,31 +68,20 @@
   transition: scale 300ms, background-color 300ms;
   cursor: pointer;
 }
+.combinationsNavItem .combinations .combinationsLink img {
+  width: 24px;
+  height: 24px;
+}
 .combinationsNavItem .combinations .combinationsLink:hover {
   background-color: rgba(0, 0, 0, 0.1450980392);
 }
 .combinationsNavItem .combinations .combinationsLink.router-link-active {
   background-color: var(--dynamic-background);
 }
-.combinationsNavItem .combinations :nth-child(1) {
-  transition-delay: 20ms;
-}
-.combinationsNavItem .combinations :nth-child(2) {
-  transition-delay: 40ms;
-}
-.combinationsNavItem .combinations :nth-child(3) {
-  transition-delay: 60ms;
-}
-.combinationsNavItem .combinations :nth-child(4) {
-  transition-delay: 80ms;
-}
-.combinationsNavItem .combinations :nth-child(5) {
-  transition-delay: 100ms;
-}
-.combinationsNavItem .combinations :nth-child(6) {
-  transition-delay: 120ms;
-}
 
+.showCombinations {
+  background-color: var(--combinations-background);
+}
 .showCombinations .combinations {
   pointer-events: all;
 }
