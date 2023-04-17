@@ -56,19 +56,19 @@
             background-color: black;
             color: white;
             font-weight: 600;
-            translate: 150% 0;
+            translate: 350% 0;
             opacity: 1;
             font-size: 14px;
             cursor: pointer;
         }
         :nth-child(3){
-            transition: scale 200ms, translate 200ms 100ms, opacity 200ms 100ms;
+            transition: scale 200ms, translate 400ms 100ms, opacity 200ms 100ms;
         }
         :nth-child(2){
-            transition: scale 200ms, translate 200ms 200ms, opacity 200ms 200ms;
+            transition: scale 200ms, translate 400ms 200ms, opacity 200ms 200ms;
         }
         :nth-child(1){
-            transition: scale 200ms, translate 200ms 300ms, opacity 200ms 300ms;
+            transition: scale 200ms, translate 400ms 300ms, opacity 200ms 300ms;
         }
 
     }
@@ -90,6 +90,20 @@
 
 @media screen and (max-width: 1500px) {
     .sideExportBtn{
-        display: none;
+        border-radius: 32px;
+        width: 48px;
+        height: 48px;
+        .arc{
+            display: none;
+        }
+        .toggleExpandBtn{
+            .toggleIcon{
+                width: 32px;
+                height: 32px;
+            }
+        }
+        .exportActions{
+            right: 0;
+        }
     }
 }

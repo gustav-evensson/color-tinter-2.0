@@ -38,7 +38,7 @@ function toggleMenu(){
 				<div class="topLine"></div>
 				<div class="bottomLine"></div>
 			</button>
-            <h4>shades</h4>
+            <h4>Shades</h4>
 		</header>
 		<color-spectrum spectrum="shades" :color="color" :key="color" :color-count="6" />
 	</div>

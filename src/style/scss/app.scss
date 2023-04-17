@@ -116,6 +116,11 @@
     .colorDisplay.menuOpen{
         translate: 366px 0;
     }
+    .sideBar{
+        .bottomSection{
+            padding-right: 16px;
+        }
+    }
 }
 @media screen and (max-width: 440px) {
     #app{
