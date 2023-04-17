@@ -2,20 +2,21 @@
 
 :root {
 	--dynamic-background: #000;
+	--combinations-background: #fff;
 }
 
 .navItem {
 	width: 100%;
 	display: flex;
-    align-items: center;
+	align-items: center;
 	text-decoration: none;
-    gap: 12px;
+	gap: 12px;
 	border-radius: 16px;
-    padding: 12px;
-	background-color: transparent;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
+	padding: 12px;
+	background-color: white;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
 	transition: background-color 300ms, box-shadow 300ms;
-    .navIcon {
+	.navIcon {
 		width: 32px;
 		height: 32px;
 		filter: invert(0);
@@ -31,11 +32,83 @@
 }
 .navItem.router-link-active {
 	background-color: var(--dynamic-background);
-	transition: background-color 300ms;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 .navItem.router-link-active:hover {
 	.navItemContainer {
 		background-color: transparent;
 	}
 }
+.combinationsNavItem {
+	position: relative;
+	z-index: 1;
+	background-color: var(--combinations-background);
+	.combinations {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		pointer-events: none;
+		.combinationsLink {
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			background-color: #fff;
+			translate: 0 calc(100% + 16px);
+			scale: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transition: scale 300ms, background-color 300ms;
+			cursor: pointer;
+		}
+		.combinationsLink:hover {
+			background-color: #00000025;
+		}
+		.combinationsLink.router-link-active {
+			background-color: var(--dynamic-background);
+		}
+		:nth-child(1) {
+			transition-delay: 20ms;
+		}
+		:nth-child(2) {
+			transition-delay: 40ms;
+		}
+		:nth-child(3) {
+			transition-delay: 60ms;
+		}
+		:nth-child(4) {
+			transition-delay: 80ms;
+		}
+		:nth-child(5) {
+			transition-delay: 100ms;
+		}
+		:nth-child(6) {
+			transition-delay: 120ms;
+		}
+	}
+}
+.showCombinations{
+	.combinations{
+		pointer-events: all;
+		.combinationsLink{
+			scale: 1;
+		}
+	}
+}
+.showCombinations:hover{
+	background-color: var(--combinations-background);
+}
+
+
+// .combinationsNavItem.router-link-active {
+// 	.combinations {
+// 		pointer-events: all;
+// 		.combinationsLink {
+// 			scale: 1;
+// 		}
+// 	}
+// }

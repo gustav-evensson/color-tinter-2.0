@@ -8,6 +8,7 @@ import navItem from './components/navItem.vue';
 import numberSlider from './components/numberSlider.vue';
 import currentColorDisplay from './components/currentColorDisplay.vue';
 import sideExportBtn from './components/sideExportBtn.vue';
+import CombinationsNavItem from './components/combinationsNavItem.vue';
 
 const menuCtrl = useMenuCtrl();
 const globalColor = useColorStore();
@@ -85,12 +86,12 @@ const textColor = computed(() => {
 			<color-picker @emitColor="getColor" @fetchName="getColorName" />
 		</div>
 		<current-color-display :color="validatedColor" :colorName="state.colorName" />
-		<!-- <div class="divider"></div> -->
 		<div class="navItems">
 			<nav-item icon="src/assets/tints.svg" label="Tints" :color="validatedColor" routerTo="" />
 			<nav-item icon="src/assets/shades.svg" label="Shades" :color="validatedColor" routerTo="shades" />
 			<nav-item icon="src/assets/tones.svg" label="Tones" :color="validatedColor" routerTo="tones" />
 			<nav-item icon="src/assets/contrast.svg" label="Contrast" :color="validatedColor" routerTo="contrast" />
+			<combinations-nav-item icon="src/assets/combinations.svg" label="Combinations" :color="validatedColor" routerTo="complementary" />
 		</div>
 		<div class="bottomSection">
 			<div class="sliderContainer">

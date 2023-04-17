@@ -20,6 +20,7 @@
 			position: relative;
 			width: 32px;
 			height: 32px;
+			cursor: pointer;
 			.topLine, .bottomLine{
 				--transition-timing: 200ms;
 				transition: rotate var(--transition-timing), top var(--transition-timing) var(--transition-timing), bottom var(--transition-timing) var(--transition-timing), translate var(--transition-timing) var(--transition-timing);
