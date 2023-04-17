@@ -1,6 +1,6 @@
 <script setup>
 import { adjustHue, parseToHsla } from 'color2k';
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import colorContainer from './colorContainer.vue';
 import { useColorStore } from '../stores/color';
 
@@ -18,6 +18,16 @@ onMounted(() => {
 	colorCount.value = globalColor.getColorCount;
 	pickSpectrum();
 });
+
+const correctOpacity = computed(() => {
+	const parsedColor = parseToHsla(props.color)
+	if(parsedColor[3] !== 1) {
+		return '#ffffff00'
+	}
+	else{
+		return props.color
+	}
+})
 
 watch(
 	() => globalColor.getColorCount,
@@ -86,7 +96,7 @@ function squareArray(clr) {
 </script>
 
 <template>
-	<div class="colorSpectrum" :style="{ backgroundColor: props.color }">
+	<div class="colorSpectrum" :style="{ backgroundColor: correctOpacity }">
 		<color-container v-for="(color, idx) in colorArray" :key="color" :color="color" :ani-delay="idx * 50" />
 	</div>
 </template>

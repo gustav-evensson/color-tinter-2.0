@@ -95,7 +95,7 @@ const textColor = computed(() => {
 		</div>
 		<div class="bottomSection">
 			<div class="sliderContainer">
-				<number-slider @emit-value="getCount" :step="1" :min="2" :max="10" :color="validatedColor" />
+				<number-slider @emit-value="getCount" :step="1" :min="2" :max="10" :color="validatedColor"/>
 			</div>
 			<side-export-btn :color="validatedColor" />
 		</div>

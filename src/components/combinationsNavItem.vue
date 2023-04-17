@@ -50,22 +50,17 @@ const invert = computed(() => {
 });
 
 router.afterEach((to) => {
-	if (childRoutes.includes(to.name)) {
-		// let parsedColor = parseToHsla(props.color);
-		// root.style.setProperty('--combinations-background', `hsla(${parsedColor[0]}, ${parsedColor[1] * 100}%, ${parsedColor[2] * 100}%, 1)`);
-		showCombinations.value = true;
-		// textColor.value = readableColor(props.color)
-		// if (readableColorIsBlack(props.color)) {
-		// 	invert.value = 'invert(0)';
-		// } else {
-		// 	invert.value = 'invert(1)';
-		// }
-	} else {
-		// root.style.setProperty('--combinations-background', `#fff`);
-		showCombinations.value = false;
-		// invert.value = 'invert(0)';
-		// textColor.value = '#000'
-	}
+	showCombinations.value = childRoutes.includes(to.name)
+	// if (childRoutes.includes(to.name)) {
+	// 	showCombinations.value = true;
+
+	// 	// }
+	// } else {
+	// 	// root.style.setProperty('--combinations-background', `#fff`);
+	// 	showCombinations.value = false;
+	// 	// invert.value = 'invert(0)';
+	// 	// textColor.value = '#000'
+	// }
 });
 
 </script>
@@ -81,49 +76,6 @@ router.afterEach((to) => {
 			<combinations-link :color="props.color" icon="../../src/assets/Triadic.svg" routerTo="triadic"/>
 			<combinations-link :color="props.color" icon="../../src/assets/Tetradic.svg" routerTo="tetradic"/>
 			<combinations-link :color="props.color" icon="../../src/assets/Square.svg" routerTo="square"/>
-			<!-- <router-link class="combinationsLink" to="/complementary" :style="{ color: textColor }">
-				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="12.375" cy="6" r="2.25" :fill="textColor" />
-					<circle cx="12.375" cy="18" r="2.25" :fill="textColor" />
-				</svg>
-			</router-link>
-			<router-link class="combinationsLink" to="/splitComplementary" :style="{ color: textColor }">
-				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="12.625" cy="6" r="2.25" :fill="textColor" />
-					<circle cx="17.125" cy="18" r="2.25" :fill="textColor" />
-					<circle cx="8.125" cy="18" r="2.25" :fill="textColor" />
-				</svg>
-			</router-link>
-			<router-link class="combinationsLink" to="/analogous" :style="{ color: textColor }">
-				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="12.875" cy="10.5" r="2.25" :fill="textColor" />
-					<circle cx="19.625" cy="12.75" r="2.25" :fill="textColor" />
-					<circle cx="6.125" cy="12.75" r="2.25" :fill="textColor" />
-				</svg>
-			</router-link>
-			<router-link class="combinationsLink" to="/triadic" :style="{ color: textColor }">
-				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="12.125" cy="6.75" r="2.25" :fill="textColor" />
-					<circle cx="18.875" cy="17.25" r="2.25" :fill="textColor" />
-					<circle cx="5.375" cy="17.25" r="2.25" :fill="textColor" />
-				</svg>
-			</router-link>
-			<router-link class="combinationsLink" to="/tetradic" :style="{ color: textColor }">
-				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="7.875" cy="6" r="2.25" :fill="textColor" />
-					<circle cx="16.875" cy="6" r="2.25" :fill="textColor" />
-					<circle cx="16.875" cy="18" r="2.25" :fill="textColor" />
-					<circle cx="7.875" cy="18" r="2.25" :fill="textColor" />
-				</svg>
-			</router-link>
-			<router-link class="combinationsLink" to="/square" :style="{ color: textColor }">
-				<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="6.625" cy="12" r="2.25" :fill="textColor" />
-					<circle cx="12.625" cy="6" r="2.25" :fill="textColor" />
-					<circle cx="18.625" cy="12" r="2.25" :fill="textColor" />
-					<circle cx="12.625" cy="18" r="2.25" :fill="textColor" />
-				</svg>
-			</router-link> -->
 		</div>
 	</router-link>
 </template>
