@@ -24,7 +24,8 @@
 		z-index: -10;
 	}
     .exportCard{
-        width: 800px;
+        width: 100%;
+        max-width: 800px;
 		height: 600px;
         border-radius: 16px;
         background-color: #fff;
@@ -33,6 +34,7 @@
         flex-direction: column;
         align-items: flex-end;
         gap: 12px;
+        transition: translate 300ms;
         .codeDisplay {
             width: 100%;
             height: 100%;
@@ -41,7 +43,9 @@
             padding: 20px;
             pre{
                 font-size: 24px;
+                margin-right: 20px;
             }
+            overflow: auto;
         }
         .copyBtn{
             font-family: 'Avenir', sans-serif;
@@ -61,4 +65,42 @@
 .showExport{
     opacity: 1;
     pointer-events: all;
+    .exportCard{
+        translate: 0 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .exportContainer{
+        align-items: flex-end;
+        .exportCard{
+            border-radius: 16px 16px 0 0;
+            max-width: unset;
+            height: auto;
+            translate: 0 100%;
+            .codeDisplay{
+                min-height: 300px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 700px) {
+    .exportContainer{
+        .exportCard{
+            .codeDisplay{
+                pre{
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 500px) {
+    .exportContainer{
+        .exportCard{
+            .copyBtn{
+                width: 100%;
+            }
+        }
+    }
 }
