@@ -16,6 +16,7 @@ import './style/css/numberSlider.css'
 import './style/css/currentColorDisplay.css'
 import './style/css/sideExportBtn.css'
 import './style/css/contrastContainer.css'
+import './style/css/exportContainer.css'
 
 export const ajs = new AlertsJS({
 	position: 'bottom-right',

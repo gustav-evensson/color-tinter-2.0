@@ -35,6 +35,7 @@ const calcValue = computed(() => {
 });
 
 const steppedValue = computed(() => {
+	// globalColor.setColorCount(Math.round(calcValue.value / state.step) * state.step)
 	return Math.round(calcValue.value / state.step) * state.step;
 });
 

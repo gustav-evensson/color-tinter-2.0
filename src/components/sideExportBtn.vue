@@ -1,11 +1,14 @@
 <script setup>
 import { readableColor } from 'color2k';
 import { computed, ref } from 'vue'
+import { useColorStore } from '../stores/color';
 
+const globalColor = useColorStore()
 const isExpanded = ref(false)
 const props = defineProps({
     color: String
 })
+const emit = defineEmits(['doExport'])
 
 const textColor = computed(() => {
     return readableColor(props.color)
@@ -13,6 +16,10 @@ const textColor = computed(() => {
 
 function toggleExpand() {
     isExpanded.value = !isExpanded.value
+}
+
+function sendExport(type){
+    emit('doExport', type)
 }
 </script>
 
@@ -45,9 +52,9 @@ function toggleExpand() {
             </div>
         </button>
         <div class="exportActions" :class="{ expanded: isExpanded }">
-            <button class="exportAction" :style="{ backgroundColor: props.color , color: textColor}">SCSS</button>
-            <button class="exportAction" :style="{ backgroundColor: props.color , color: textColor}">CSS</button>
-            <button class="exportAction" :style="{ backgroundColor: props.color , color: textColor}">JS</button>
+            <button class="exportAction" @click="sendExport('scss')" :style="{ backgroundColor: props.color , color: textColor}">SCSS</button>
+            <button class="exportAction" @click="sendExport('css')" :style="{ backgroundColor: props.color , color: textColor}">CSS</button>
+            <button class="exportAction" @click="sendExport('js')" :style="{ backgroundColor: props.color , color: textColor}">JS</button>
         </div>
 	</div>
 </template>

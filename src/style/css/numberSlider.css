@@ -21,5 +21,8 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: left 100ms;
+  transition: left 100ms, scale 200ms;
+}
+.numberSlider .sliderThumb:hover {
+  scale: 1.1;
 }

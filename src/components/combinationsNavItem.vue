@@ -51,16 +51,6 @@ const invert = computed(() => {
 
 router.afterEach((to) => {
 	showCombinations.value = childRoutes.includes(to.name)
-	// if (childRoutes.includes(to.name)) {
-	// 	showCombinations.value = true;
-
-	// 	// }
-	// } else {
-	// 	// root.style.setProperty('--combinations-background', `#fff`);
-	// 	showCombinations.value = false;
-	// 	// invert.value = 'invert(0)';
-	// 	// textColor.value = '#000'
-	// }
 });
 
 </script>

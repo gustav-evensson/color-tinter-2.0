@@ -40,7 +40,6 @@ function copyColor() {
 	ajs.createAlert(`Copied ${hexColor.value.toUpperCase()}!`, 'success', 3000);
 }
 function pickColor() {
-	console.log(props.color);
 	globalColor.setColor(props.color);
 	globalColor.setDoFetch();
 }
