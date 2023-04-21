@@ -3,6 +3,12 @@ import { readableColor, readableColorIsBlack, parseToHsla } from 'color2k';
 import { watch, computed, onMounted, ref, onUpdated } from 'vue';
 import router from '../router/index.js';
 import combinationsLink from './combinationsLink.vue';
+import complemenraryIcon from "../../src/assets/Complementary.svg"
+import splitComplementaryIcon from "../../src/assets/SplitComplementary.svg"
+import analogousIcon from "../../src/assets/Analogous.svg"
+import triadicIcon from "../../src/assets/Triadic.svg"
+import tetradicIcon from "../../src/assets/Tetradic.svg"
+import squareIcon from "../../src/assets/Square.svg"
 
 const root = document.querySelector(':root');
 const showCombinations = ref(true);
@@ -52,20 +58,19 @@ const invert = computed(() => {
 router.afterEach((to) => {
 	showCombinations.value = childRoutes.includes(to.name)
 });
-
 </script>
 
 <template>
 	<router-link ref="navItem" class="navItem combinationsNavItem" :class="{ showCombinations: showCombinations }" :to="'/' + props.routerTo || ''">
-		<img :style="{ filter: invert }" class="navIcon" :src="props.icon" />
+		<img :style="{ filter: invert }" class="navIcon" :src="props.icon" draggable="false" />
 		<p :style="{ color: textColor }" class="navLabel">{{ props.label }}</p>
 		<div class="combinations">
-			<combinations-link :color="props.color" icon="../../src/assets/Complementary.svg" routerTo="complementary"/>
-			<combinations-link :color="props.color" icon="../../src/assets/SplitComplementary.svg" routerTo="splitComplementary"/>
-			<combinations-link :color="props.color" icon="../../src/assets/Analogous.svg" routerTo="analogous"/>
-			<combinations-link :color="props.color" icon="../../src/assets/Triadic.svg" routerTo="triadic"/>
-			<combinations-link :color="props.color" icon="../../src/assets/Tetradic.svg" routerTo="tetradic"/>
-			<combinations-link :color="props.color" icon="../../src/assets/Square.svg" routerTo="square"/>
+			<combinations-link :color="props.color" :icon="complemenraryIcon" routerTo="complementary" />
+			<combinations-link :color="props.color" :icon="splitComplementaryIcon" routerTo="splitComplementary" />
+			<combinations-link :color="props.color" :icon="analogousIcon" routerTo="analogous" />
+			<combinations-link :color="props.color" :icon="triadicIcon" routerTo="triadic" />
+			<combinations-link :color="props.color" :icon="tetradicIcon" routerTo="tetradic" />
+			<combinations-link :color="props.color" :icon="squareIcon" routerTo="square" />
 		</div>
 	</router-link>
 </template>

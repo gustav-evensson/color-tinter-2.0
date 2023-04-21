@@ -3,14 +3,14 @@
 	z-index: 1000;
 	position: fixed;
 	width: 100%;
-    height: 100%;
+	height: 100%;
 	inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 300ms;
-    pointer-events: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 300ms;
+	pointer-events: none;
 	.closeExport {
 		background-color: transparent;
 		border: none;
@@ -23,84 +23,88 @@
 		background-color: hsla(0, 0, 0, 0.4);
 		z-index: -10;
 	}
-    .exportCard{
-        width: 100%;
-        max-width: 800px;
+	.exportCard {
+		width: 100%;
+		max-width: 800px;
 		height: 600px;
-        border-radius: 16px;
-        background-color: #fff;
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 12px;
-        transition: translate 300ms;
-        .codeDisplay {
-            width: 100%;
-            height: 100%;
-            border-radius: 4px;
-            background-color: #ededed;
-            padding: 20px;
-            pre{
-                font-size: 24px;
-                margin-right: 20px;
-            }
-            overflow: auto;
-        }
-        .copyBtn{
-            font-family: 'Avenir', sans-serif;
-            padding: 8px 32px;
-            font-size: 20px;
-            font-weight: 500;
-            border: none;
-            background-color: transparent;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .copyBtn:hover{
-            filter: brightness(1.2);
-        }
-    }
+		border-radius: 16px;
+		background-color: #fff;
+		padding: 12px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 12px;
+		transition: translate 300ms;
+		.codeDisplay {
+			width: 100%;
+			height: 100%;
+			border-radius: 4px;
+			background-color: #ededed;
+			padding: 20px;
+			pre {
+				font-size: 24px;
+				margin-right: 20px;
+			}
+			overflow: auto;
+		}
+		.copyBtn {
+			font-family: 'Avenir', sans-serif;
+			padding: 8px 32px;
+			font-size: 20px;
+			font-weight: 500;
+			border: none;
+			background-color: transparent;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		.copyBtn:hover {
+			filter: brightness(1.2);
+		}
+	}
 }
-.showExport{
-    opacity: 1;
-    pointer-events: all;
-    .exportCard{
-        translate: 0 0;
-    }
+.showExport {
+	opacity: 1;
+	pointer-events: all;
 }
 
 @media screen and (max-width: 900px) {
-    .exportContainer{
-        align-items: flex-end;
-        .exportCard{
-            border-radius: 16px 16px 0 0;
-            max-width: unset;
-            height: auto;
-            translate: 0 100%;
-            .codeDisplay{
-                min-height: 300px;
-            }
-        }
-    }
+	.exportContainer {
+		align-items: flex-end;
+		.exportCard {
+			border-radius: 16px 16px 0 0;
+			max-width: unset;
+			height: auto;
+			translate: 0 100%;
+			.codeDisplay {
+				min-height: 300px;
+			}
+		}
+	}
+	.showExport {
+		opacity: 1;
+		pointer-events: all;
+		.exportCard {
+			translate: 0 0;
+		}
+	}
 }
 @media screen and (max-width: 700px) {
-    .exportContainer{
-        .exportCard{
-            .codeDisplay{
-                pre{
-                    font-size: 18px;
-                }
-            }
-        }
-    }
+	.exportContainer {
+		.exportCard {
+			.codeDisplay {
+				pre {
+					font-size: 18px;
+				}
+			}
+		}
+	}
 }
 @media screen and (max-width: 500px) {
-    .exportContainer{
-        .exportCard{
-            .copyBtn{
-                width: 100%;
-            }
-        }
-    }
+	.exportContainer {
+		.exportCard {
+			.copyBtn {
+				width: 100%;
+			}
+		}
+	}
 }

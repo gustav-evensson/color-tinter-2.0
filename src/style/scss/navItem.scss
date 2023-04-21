@@ -13,8 +13,9 @@
 	gap: 12px;
 	border-radius: 16px;
 	padding: 12px;
-	background-color: white;
+	background-color: transparent;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
+	margin-bottom: 12px;
 	transition: background-color 300ms, box-shadow 300ms;
 	.navIcon {
 		width: 32px;
@@ -42,7 +43,8 @@
 .combinationsNavItem {
 	position: relative;
 	z-index: 1;
-	background-color: #fff;
+	background-color: transparent;
+	margin-bottom: 64px;
 	.combinations {
 		position: absolute;
 		bottom: 0;
@@ -56,7 +58,7 @@
 			width: 36px;
 			height: 36px;
 			border-radius: 50%;
-			background-color: #fff;
+			background-color: transparent;
 			translate: 0 calc(100% + 16px);
 			scale: 0;
 			display: flex;

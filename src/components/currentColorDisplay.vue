@@ -32,7 +32,7 @@ const textColor = computed(() => {
 
 function copyColorCode(colorCode){
     navigator.clipboard.writeText(colorCode);
-    ajs.createAlert(`Copied ${colorCode}!`, 'success', 3000)
+    ajs.createAlert(`Copied ${colorCode}`, 'success', 3000)
     
 }
 </script>

@@ -67,9 +67,6 @@
   opacity: 1;
   pointer-events: all;
 }
-.showExport .exportCard {
-  translate: 0 0;
-}
 
 @media screen and (max-width: 900px) {
   .exportContainer {
@@ -83,6 +80,13 @@
   }
   .exportContainer .exportCard .codeDisplay {
     min-height: 300px;
+  }
+  .showExport {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .showExport .exportCard {
+    translate: 0 0;
   }
 }
 @media screen and (max-width: 700px) {

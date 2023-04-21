@@ -10,7 +10,7 @@ import triadicView from '../views/triadicView.vue'
 import tetradicView from '../views/tetradicView.vue'
 import squareView from '../views/squareView.vue'
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',

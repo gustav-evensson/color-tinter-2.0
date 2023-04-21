@@ -5,6 +5,7 @@
   border-radius: 32px 0 0 32px;
   position: relative;
   translate: 16px 0;
+  z-index: 20;
 }
 .sideExportBtn .toggleExpandBtn {
   height: 100%;
@@ -62,19 +63,18 @@
   background-color: black;
   color: white;
   font-weight: 600;
-  translate: 350% 0;
-  opacity: 1;
+  scale: 0;
   font-size: 14px;
   cursor: pointer;
 }
 .sideExportBtn .exportActions :nth-child(3) {
-  transition: scale 200ms, translate 400ms 100ms, opacity 200ms 100ms;
+  transition: scale 300ms, filter 300ms;
 }
 .sideExportBtn .exportActions :nth-child(2) {
-  transition: scale 200ms, translate 400ms 200ms, opacity 200ms 200ms;
+  transition: scale 300ms 100ms, filter 300ms;
 }
 .sideExportBtn .exportActions :nth-child(1) {
-  transition: scale 200ms, translate 400ms 300ms, opacity 200ms 300ms;
+  transition: scale 300ms 200ms, filter 300ms;
 }
 .sideExportBtn .exportActions.expanded {
   pointer-events: all;
@@ -85,10 +85,7 @@
   translate: 0 0;
 }
 .sideExportBtn .exportActions.expanded .exportAction:hover {
-  scale: 1.1;
-}
-.sideExportBtn .exportActions.expanded .exportAction:active {
-  scale: 0.9;
+  filter: saturate(0);
 }
 
 @media screen and (max-width: 1500px) {

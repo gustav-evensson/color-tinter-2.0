@@ -22,6 +22,7 @@ export const ajs = new AlertsJS({
 	position: 'bottom-right',
 	wallGap: 32,
 	scaling: 1,
+	hideCountdown: true
 });
 
 const app = createApp(App)

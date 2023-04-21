@@ -13,16 +13,16 @@
   translate: 0 0;
   border-radius: 16px;
   padding: 0;
-  background-color: var(--bg);
+  background-color: #fff;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
   height: 60px;
-  box-shadow: 0 0 12px -5px hsla(0, 0%, 0%, 0);
   transition: height 300ms, padding 300ms, border-radius 300ms, translate 300ms, box-shadow 300ms;
   z-index: 3;
+  touch-action: none;
 }
 .colorPicker * {
   flex-shrink: 0;
@@ -62,8 +62,7 @@
   stroke: var(--accent);
 }
 .colorInput input {
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
   background-color: transparent;
   border: none;
   outline: none;
@@ -76,11 +75,10 @@
 }
 
 .showPicker {
-  height: 384px;
+  height: 344px;
   padding: 16px;
   border-radius: 32px;
   translate: 0 0;
-  box-shadow: 0 0 12px -5px hsla(0, 0%, 0%, 0.5);
 }
 .showPicker .colorInput, .showPicker .colorGraph, .showPicker .hueSlider, .showPicker .alphaSlider, .showPicker .hslaDisplay {
   opacity: 1;
@@ -122,6 +120,7 @@
   /* All the same stuff for IE */
 }
 .hueSlider input[type=range], .alphaSlider input[type=range] {
+  appearance: none;
   -webkit-appearance: none;
   width: 100%;
   background: transparent;
@@ -201,23 +200,4 @@
 .alphaSlider input[type=range] {
   position: relative;
   z-index: 300;
-}
-
-.hslaDisplay {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  border-radius: 20px;
-  overflow: hidden;
-  width: 300px;
-  opacity: 0;
-  transition: opacity 300ms;
-}
-.hslaDisplay .hslaValue {
-  padding: 4px;
-  background-color: #353535;
-  color: #CCCCCC;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

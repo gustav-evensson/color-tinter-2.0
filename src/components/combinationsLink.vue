@@ -60,6 +60,6 @@ watch(
 
 <template>
 	<router-link ref="navItem" class="combinationsLink" :to="'/' + props.routerTo || ''">
-		<img :style="{ filter: invert }" class="navIcon" :src="props.icon" />
+		<img :style="{ filter: invert }" class="navIcon" :src="props.icon" draggable="false"/>
 	</router-link>
 </template>

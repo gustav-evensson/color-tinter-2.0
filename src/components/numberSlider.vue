@@ -2,7 +2,9 @@
 import { readableColor } from 'color2k';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { useColorStore } from '../stores/color';
+import router from '../router';
 
+const visibleOnRoutes = ['', 'shades', 'tones']
 const globalColor = useColorStore()
 const props = defineProps({
 	step: Number,
@@ -12,6 +14,7 @@ const props = defineProps({
 });
 const emits = defineEmits(['emitValue']);
 
+const disableSlider = ref(false)
 const numberSlider = ref(null);
 const state = reactive({
 	sliderValue: undefined,
@@ -20,6 +23,10 @@ const state = reactive({
 	min: 0,
 	max: 100,
 });
+
+router.afterEach((to) => {
+	disableSlider.value = !(visibleOnRoutes.includes(to.name))
+})
 
 onMounted(() => {
 	state.step = props.step || state.step;
@@ -35,7 +42,6 @@ const calcValue = computed(() => {
 });
 
 const steppedValue = computed(() => {
-	// globalColor.setColorCount(Math.round(calcValue.value / state.step) * state.step)
 	return Math.round(calcValue.value / state.step) * state.step;
 });
 
@@ -61,7 +67,7 @@ function dragElement(elmnt) {
 	function dragMouseDown(e) {
 		elmnt.childNodes[1].style.transition = 'none'
 		document.onmouseup = closeDragElement;
-		document.ontouchend =closeDragElement
+		document.ontouchend = closeDragElement
 		// Call the elementDrag function whenever the cursor moves:
 		document.onmousemove = elementDrag;
 		document.ontouchmove = elementTouchDrag;
@@ -123,9 +129,9 @@ function dragElement(elmnt) {
 </script>
 
 <template>
-	<div ref="numberSlider" class="numberSlider">
+	<div :class="{ disable: disableSlider }" ref="numberSlider" class="numberSlider">
 		<div class="sliderTrack"></div>
-		<div class="sliderThumb" :style="{ left: state.sliderValue + 'px', backgroundColor: props.color }">
+		<div class="sliderThumb" :style="{ left: state.sliderValue + 'px'}">
 			<p class="sliderValue" :style="{color: textColor}">{{ steppedValue }}</p>
 		</div>
 	</div>

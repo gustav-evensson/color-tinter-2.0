@@ -37,7 +37,7 @@ onMounted(() => {
 
 function copyColor() {
 	navigator.clipboard.writeText(hexColor.value);
-	ajs.createAlert(`Copied ${hexColor.value.toUpperCase()}!`, 'success', 3000);
+	ajs.createAlert(`Copied ${hexColor.value.toUpperCase()}`, 'success');
 }
 function pickColor() {
 	globalColor.setColor(props.color);
@@ -47,7 +47,6 @@ function pickColor() {
 
 <template>
 	<div ref="colorContainer" class="colorContainer" :style="{ backgroundColor: props.color }">
-		<button class="touchCopy" @click="copyColor()"></button>
 		<div class="colorActions">
 			<button @click="pickColor()" class="pickBtn">
 				<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

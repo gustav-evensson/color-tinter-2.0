@@ -10,6 +10,11 @@ import currentColorDisplay from './components/currentColorDisplay.vue';
 import sideExportBtn from './components/sideExportBtn.vue';
 import CombinationsNavItem from './components/combinationsNavItem.vue';
 import exportContainer from './components/exportContainer.vue';
+import tintsIcon from './assets/tints.svg'
+import tonesIcon from './assets/tones.svg'
+import shadesIcon from './assets/shades.svg'
+import contrastIcon from './assets/contrast.svg'
+import combinationsIcon from './assets/combinations.svg'
 
 const expContainer = ref(null)
 const menuCtrl = useMenuCtrl();
@@ -46,6 +51,7 @@ watch(
 watch(
 	() => globalColor.doFetch,
 	(newCount) => {
+		state.currentColor = globalColor.getColor
 		fetch(`https://www.thecolorapi.com/id?hex=${toHex(globalColor.getColor).slice(1)}`)
 			.then((res) => res.json())
 			.then((data) => state.colorName = data.name.value)
@@ -72,8 +78,15 @@ function doExport(type){
 	expContainer.value.createExport(validatedColor.value, type, globalColor.getColorCount)
 }
 
+function closeMenu(){
+	if(state.isMenuOpen){
+		state.isMenuOpen = false
+	}
+}
+
 const validatedColor = computed(() => {
 	try {
+		console.log('validated')
 		return toHsla(state.currentColor);
 	} catch {
 		return '#000000';
@@ -91,12 +104,13 @@ const textColor = computed(() => {
 			<color-picker @emitColor="getColor" @fetchName="getColorName" />
 		</div>
 		<current-color-display :color="validatedColor" :colorName="state.colorName" />
+		<div class="divider"></div>
 		<div class="navItems">
-			<nav-item icon="src/assets/tints.svg" label="Tints" :color="validatedColor" routerTo="" />
-			<nav-item icon="src/assets/shades.svg" label="Shades" :color="validatedColor" routerTo="shades" />
-			<nav-item icon="src/assets/tones.svg" label="Tones" :color="validatedColor" routerTo="tones" />
-			<nav-item icon="src/assets/contrast.svg" label="Contrast" :color="validatedColor" routerTo="contrast" />
-			<combinations-nav-item icon="src/assets/combinations.svg" label="Combinations" :color="validatedColor" routerTo="complementary" />
+			<nav-item :icon="tintsIcon" label="Tints" :color="validatedColor" routerTo="" />
+			<nav-item :icon="shadesIcon" label="Shades" :color="validatedColor" routerTo="shades" />
+			<nav-item :icon="tonesIcon" label="Tones" :color="validatedColor" routerTo="tones" />
+			<nav-item :icon="contrastIcon" label="Contrast" :color="validatedColor" routerTo="contrast" />
+			<combinations-nav-item :icon="combinationsIcon" label="Combinations" :color="validatedColor" routerTo="complementary" />
 		</div>
 		<div class="bottomSection">
 			<div class="sliderContainer">

@@ -7,16 +7,6 @@
     opacity: 0;
     position: relative;
     transition: opacity 300ms;
-    .touchCopy{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        inset: 0;
-        display: none;
-        z-index: 2;
-        background-color: transparent;
-        border: none;
-    }
     .colorActions{
         display: flex;
         flex-direction: column;
@@ -68,13 +58,10 @@
 
 @media (hover: none) {
     .colorContainer {
-        .touchCopy{
-            display: block;
-        }
         .colorActions{
             opacity: 1;
             button{
-                display: none;
+                opacity: 1;
             }
         }
     }

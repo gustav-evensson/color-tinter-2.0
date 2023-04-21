@@ -3,6 +3,7 @@ import { hsla, parseToHsla, readableColor, toHex } from 'color2k';
 import { ref, reactive, onMounted, computed, onUpdated, watch } from 'vue';
 import colorInput from './colorInput.vue';
 import { useColorStore } from '../stores/color';
+import { ajs } from '../main';
 
 const globalColor = useColorStore();
 const emit = defineEmits(['emitColor', 'fetchName']);
@@ -13,7 +14,7 @@ const state = reactive({
 	x: 0,
 	y: 0,
 	hue: 0,
-	alpha: 0,
+	alpha: 1,
 	graphWidth: 400,
 	graphHeight: 200,
 });
@@ -95,14 +96,19 @@ const hueReadColor = computed(() => {
 });
 
 function setIndicators(inputColor) {
-	const hslaArray = parseToHsla(inputColor);
-	// Calculateing the x, y, hue and aplha value from the color to the sliders
-	state.hue = hslaArray[0] / 3.6;
-	state.x = hslaArray[1] * state.graphWidth;
-	state.y = (1 - hslaArray[2] / (1 - hslaArray[1] / 2)) * state.graphHeight;
-	state.alpha = hslaArray[3] * 100;
-	// Fetch the name when we get the input emit
-	emit('fetchName', color.value);
+	try{
+		const hslaArray = parseToHsla(inputColor);
+		// Calculateing the x, y, hue and aplha value from the color to the sliders
+		state.hue = hslaArray[0] / 3.6;
+		state.x = hslaArray[1] * state.graphWidth;
+		state.y = (1 - hslaArray[2] / (1 - hslaArray[1] / 2)) * state.graphHeight;
+		state.alpha = hslaArray[3] * 100;
+		// Fetch the name when we get the input emit
+		emit('fetchName', color.value);
+	}
+	catch{
+		ajs.createAlert('The input is not a color!', 'error', )
+	}
 }
 function setIndicatorsNoFetch(inputColor) {
 	const hslaArray = parseToHsla(inputColor);
@@ -189,11 +195,6 @@ function dragElement(elmnt) {
 		</div>
 		<div class="hueSlider">
 			<input @mouseup="slidersEmit" v-model="state.hue" type="range" step="0.2" :style="{ color: hueReadColor }" />
-		</div>
-		<div class="alphaSlider">
-			<img src="../assets/alphaBG.jpg" alt="" draggable="false" />
-			<div class="aplhGradient" :style="{ background: alphaGradient }"></div>
-			<input v-model="state.alpha" type="range" step="1" :style="{ color: readColor }" />
 		</div>
 	</div>
 </template>
