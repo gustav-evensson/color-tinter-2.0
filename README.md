@@ -27,7 +27,7 @@ Tinting a color means to increase its lightness value.
 
 1. The Darkness spectrum
 
-![](https://github.com/gustav-evensson/color-tinter/blob/main/readmeAssets/Darkness.png)
+![](https://github.com/gustav-evensson/color-tinter-2.0/images/tints.png)
 
 This returns 11 variations of the color where the first one is the inputed color and the last one is black. In between thos two the color gradually gets darker.
 
