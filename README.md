@@ -25,43 +25,25 @@ Lightness like saturation uses preocenteges and declares how bright the color sh
 
 Tinting a color means to increase its lightness value. 
 
-1. The Darkness spectrum
+![](https://github.com/gustav-evensson/color-tinter-2.0/blob/main/images/tints.png)
 
-![](https://github.com/gustav-evensson/color-tinter-2.0/images/tints.png)
+### Shades
 
-This returns 11 variations of the color where the first one is the inputed color and the last one is black. In between thos two the color gradually gets darker.
+Shades are to opposite of tints which means it decreases the lightness value.
 
-2. The Lightness spectrum
+![](https://github.com/gustav-evensson/color-tinter-2.0/blob/main/images/shades.png)
 
-![](https://github.com/gustav-evensson/color-tinter/blob/main/readmeAssets/Lightness.png)
+### Tones 
 
-This return similarly to the darkness spectrum 11 colors but instead of going from the main color to black this one goes from main to white with the colors in between gradually getting lighter. 
+Tones uses the saturation value that makes the color lose its intensity and makes it more gray.
 
-Both if these to are creatad by onlu changing the lightness variable of the HSLA format. 
-
-3. The Diagonal spectrum
-
-![](https://github.com/gustav-evensson/color-tinter/blob/main/readmeAssets/Diagonal.png)
-
-This spectrum takes use of both lightness and saturation when it is being created. It returns 11 colors where th first one has its lightness and saturation set to 0%, the last color has the lightness and saturation set to 100% and in between we increse both the lightness and saturation gradually to achive a in my opinion quiet usefull spectrum.
-
-4. The saturation spectrum
-
-![](https://github.com/gustav-evensson/color-tinter/blob/main/readmeAssets/Saturation.png)
-
-This is very similar to the ligntess and darkness spectrum where the main color is the first one in this spectrum and then we gradually decrese the level of saturation until we reach 0%. This spectrum only goes one way due to the input rate of already desaturated colors being very low.
-
-5. The opacity/alpha spectrum
-
-![](https://github.com/gustav-evensson/color-tinter/blob/main/readmeAssets/Opacity.png)
-
-This returns 10 colors where the first color has an opacity or alpha value of 1 and the last one has 0.1, the steps gradually then decreses with 0.1 for every color in bewtween. 
+![](https://github.com/gustav-evensson/color-tinter-2.0/blob/main/images/tones.png)
 
 ### Combination
 
-Combinations play more on the hue of the color and it returns colors of other hues that fit well with the main color.
+Combinations changes the hue of a color and there are many types of them
 
-Here we also return 5 different spectrums:
+Here we have 5 different combinations:
 
 1. Complementary color
 
@@ -91,7 +73,7 @@ This is the last part of the website where you can play around with different co
 
 - Vue
 - Vite
-- Typescript
+- Nuxt
 - JavaScript
 - SCSS
 - Firebase Hosting
