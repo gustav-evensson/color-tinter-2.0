@@ -1,5 +1,4 @@
-## About the project
-![](https://github.com/gustav-evensson/color-tinter/blob/main/website/src/assets/Color%20Tinter.png?raw=true)
+# ColorTinter
 
 ### Why did i build it?
 [Color Tinter](https://color-tinter.web.app/) is a project i started because i didnt really find a color "picker" that returned an entire spectrum of colors in the way that Color Tinter does.
@@ -10,9 +9,21 @@ I also wanted to learn more about how colors work, what are they actually made u
 
 Color Tinter is a color tool mainly diracted towards frontend developers. It takes a color as the input and the return to the users a wide variety of different color spectrums. The color can be copied by clicking it but what makes Color Tinter different is its ability to return a copyable text of the entire spectrum wich can be changed from CSS variable to SCSS variables or an array with the colors in string format.
 
+## Color manipulation
+
+Colors on the web can be represented by a veriety of codes. For example RGB or HEX which both uses different values of Red, Green and Blue to display the color. 
+
+Color Tinter uses mainly HSL that stands for Hue, Saturation and Lightness. 
+
+Hue changes the base color using degrees of a color wheel.
+
+Saturation is the amount of gray that is added to a color, measured in procentages where 100% is the most saturated version of the color and 0% is a shade of gray.
+
+Lightness like saturation uses preocenteges and declares how bright the color should appear, 100% is white and 0% is black.
+
 ### Tints
 
-The "tints" of a color includes changes in mainly the lightness and saturation of the color. Here we return 5 different spectrums:
+Tinting a color means to increase its lightness value. 
 
 1. The Darkness spectrum
 
