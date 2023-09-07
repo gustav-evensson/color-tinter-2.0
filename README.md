@@ -65,6 +65,10 @@ This one does the exact same as th trio but instead devides the wheel into 4 par
 
 This returns 3 colors wich really is the main color and 2 color where th lightness has been incresed or decresed by 10. This gives 3 very similar colors that fit well together.
 
+6. Analogous
+
+This returns 3 colors where one is the main color and the other 2 has a hue rotation of 30 deg is opposite directions.
+
 ### Contrast
 
 This is the last part of the website where you can play around with different colors to se how they do with each other when it comes to contrast. You will get back the contrast value along with a recomendation to wich use they fit. 
