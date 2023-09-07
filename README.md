@@ -43,7 +43,7 @@ Tones uses the saturation value that makes the color lose its intensity and make
 
 Combinations changes the hue of a color and there are many types of them
 
-Here we have 5 different combinations:
+Here we have 6 different combinations:
 
 1. Complementary color
 
